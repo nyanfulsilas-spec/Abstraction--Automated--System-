@@ -1,0 +1,90 @@
+from abc import ABC, abstractmethod
+
+
+# Abstract Base Class
+class BuildingSystem(ABC):
+
+    @abstractmethod
+    def start(self):
+        pass
+
+    @abstractmethod
+    def stop(self):
+        pass
+
+    @abstractmethod
+    def status(self):
+        pass
+
+
+# Concrete Child Classes
+class AirConditioningSystem(BuildingSystem):
+
+    def start(self):
+        print("Air Conditioning System: Cooling initiated.")
+
+    def stop(self):
+        print("Air Conditioning System: Cooling turned off.")
+
+    def status(self):
+        print("Air Conditioning System Status: Active - Maintaining 22°C.")
+
+
+class LightingSystem(BuildingSystem):
+
+    def start(self):
+        print("Lighting System: Auditorium lights turned ON.")
+
+    def stop(self):
+        print("Lighting System: Auditorium lights turned OFF.")
+
+    def status(self):
+        print("Lighting System Status: Active - All zones illuminated.")
+
+
+class SecuritySystem(BuildingSystem):
+
+    def start(self):
+        print("Security System: Surveillance and motion alarms armed.")
+
+    def stop(self):
+        print("Security System: Alarms disarmed.")
+
+    def status(self):
+        print("Security System Status: Active - All access points secure.")
+
+
+# Additional Class added to demonstrate Open-Closed Principle
+class FireAlarmSystem(BuildingSystem):
+
+    def start(self):
+        print("Fire Alarm System: Sensors activated and ready.")
+
+    def stop(self):
+        print("Fire Alarm System: Sensors placed on standby.")
+
+    def status(self):
+        print("Fire Alarm System Status: Active - Zero smoke detected.")
+
+
+# --- Main Demonstration ---
+if __name__ == "__main__":
+    # Create object list (including FireAlarmSystem)
+    systems: list[BuildingSystem] = [
+        AirConditioningSystem(),
+        LightingSystem(),
+        SecuritySystem(),
+        FireAlarmSystem(),  # Dynamically handled without altering execution logic
+    ]
+
+    print("=== STARTING SYSTEMS ===")
+    for system in systems:
+        system.start()
+
+    print("\n=== SYSTEM STATUS CHECK ===")
+    for system in systems:
+        system.status()
+
+    print("\n=== STOPPING SYSTEMS ===")
+    for system in systems:
+        system.stop()
